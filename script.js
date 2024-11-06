@@ -1,6 +1,7 @@
 var turn = $("h2");
 var game = 0;
 var player = 0;
+var winner = 0;
 //Row changing color on hover
 function changeColorf1(size, color){
     for(var i = 0; i< f1.length; i++){
@@ -175,6 +176,8 @@ f1.click(function(){
             }
         }
     }
+    victory();
+    draw();
 }) 
 f2.click(function(){
     if(game === 1){
@@ -263,6 +266,8 @@ f2.click(function(){
             }
         }
     }
+    victory();
+    draw();
 })
 f3.click(function(){
     if(game === 1){
@@ -351,6 +356,8 @@ f3.click(function(){
             }
         }
     }
+    victory();
+    draw();
 })
 f4.click(function(){
     if(game === 1){
@@ -439,6 +446,8 @@ f4.click(function(){
             }
         }
     }
+    victory();
+    draw();
 })
 f5.click(function(){
     if(game === 1){
@@ -527,6 +536,8 @@ f5.click(function(){
             }
         }
     }
+    victory();
+    draw();
 })
 f6.click(function(){
     if(game === 1){
@@ -615,6 +626,8 @@ f6.click(function(){
             }
         }
     }
+    victory();
+    draw();
 }) 
 f7.click(function(){
     if(game === 1){
@@ -703,7 +716,177 @@ f7.click(function(){
             }
         }
     }
+    victory();
+    draw();
 }) 
+//draw
+function draw(){
+    if (f11 !== 0 && f12 !== 0 && f13 !== 0 && f14 !== 0 && f15 !== 0 && f16 !== 0 && f17 !== 0 && winner === 0){
+        turn.css("color","purple");
+        turn.text("DRAW!");
+    }
+}
+//winner
+function victory(){
+    switch(true){
+        //vertical
+        case f61 === 1 && f51 === 1 && f41 === 1 && f31 === 1: p1Win(); break;
+        case f61 === 2 && f51 === 2 && f41 === 2 && f31 === 2: p2Win(); break;
+        case f51 === 1 && f41 === 1 && f31 === 1 && f21 === 1: p1Win(); break;
+        case f51 === 2 && f41 === 2 && f31 === 2 && f21 === 2: p2Win(); break;
+        case f41 === 1 && f31 === 1 && f21 === 1 && f11 === 1: p1Win(); break;
+        case f41 === 2 && f31 === 2 && f21 === 2 && f11 === 2: p2Win(); break;
+        case f62 === 1 && f52 === 1 && f42 === 1 && f32 === 1: p1Win(); break;
+        case f62 === 2 && f52 === 2 && f42 === 2 && f32 === 2: p2Win(); break;
+        case f52 === 1 && f42 === 1 && f32 === 1 && f22 === 1: p1Win(); break;
+        case f52 === 2 && f42 === 2 && f32 === 2 && f22 === 2: p2Win(); break;
+        case f42 === 1 && f32 === 1 && f22 === 1 && f12 === 1: p1Win(); break;
+        case f42 === 2 && f32 === 2 && f22 === 2 && f12 === 2: p2Win(); break;
+        case f63 === 1 && f53 === 1 && f43 === 1 && f33 === 1: p1Win(); break;
+        case f63 === 2 && f53 === 2 && f43 === 2 && f33 === 2: p2Win(); break;
+        case f53 === 1 && f43 === 1 && f33 === 1 && f23 === 1: p1Win(); break;
+        case f53 === 2 && f43 === 2 && f33 === 2 && f23 === 2: p2Win(); break;
+        case f43 === 1 && f33 === 1 && f23 === 1 && f13 === 1: p1Win(); break;
+        case f43 === 2 && f33 === 2 && f23 === 2 && f13 === 2: p2Win(); break;
+        case f64 === 1 && f54 === 1 && f44 === 1 && f34 === 1: p1Win(); break;
+        case f64 === 2 && f54 === 2 && f44 === 2 && f34 === 2: p2Win(); break;
+        case f54 === 1 && f44 === 1 && f34 === 1 && f24 === 1: p1Win(); break;
+        case f54 === 2 && f44 === 2 && f34 === 2 && f24 === 2: p2Win(); break;
+        case f44 === 1 && f34 === 1 && f24 === 1 && f14 === 1: p1Win(); break;
+        case f44 === 2 && f34 === 2 && f24 === 2 && f14 === 2: p2Win(); break;
+        case f65 === 1 && f55 === 1 && f45 === 1 && f35 === 1: p1Win(); break;
+        case f65 === 2 && f55 === 2 && f45 === 2 && f35 === 2: p2Win(); break;
+        case f55 === 1 && f45 === 1 && f35 === 1 && f25 === 1: p1Win(); break;
+        case f55 === 2 && f45 === 2 && f35 === 2 && f25 === 2: p2Win(); break;
+        case f45 === 1 && f35 === 1 && f25 === 1 && f15 === 1: p1Win(); break;
+        case f45 === 2 && f35 === 2 && f25 === 2 && f15 === 2: p2Win(); break;
+        case f66 === 1 && f56 === 1 && f46 === 1 && f36 === 1: p1Win(); break;
+        case f66 === 2 && f56 === 2 && f46 === 2 && f36 === 2: p2Win(); break;
+        case f56 === 1 && f46 === 1 && f36 === 1 && f26 === 1: p1Win(); break;
+        case f56 === 2 && f46 === 2 && f36 === 2 && f26 === 2: p2Win(); break;
+        case f46 === 1 && f36 === 1 && f26 === 1 && f16 === 1: p1Win(); break;
+        case f46 === 2 && f36 === 2 && f26 === 2 && f16 === 2: p2Win(); break;
+        case f67 === 1 && f57 === 1 && f47 === 1 && f37 === 1: p1Win(); break;
+        case f67 === 2 && f57 === 2 && f47 === 2 && f37 === 2: p2Win(); break;
+        case f57 === 1 && f47 === 1 && f37 === 1 && f27 === 1: p1Win(); break;
+        case f57 === 2 && f47 === 2 && f37 === 2 && f27 === 2: p2Win(); break;
+        case f47 === 1 && f37 === 1 && f27 === 1 && f17 === 1: p1Win(); break;
+        case f47 === 2 && f37 === 2 && f27 === 2 && f17 === 2: p2Win(); break;
+        //horizontal
+        case f61 === 1 && f62 === 1 && f63 === 1 && f64 === 1: p1Win(); break;
+        case f61 === 2 && f62 === 2 && f63 === 2 && f64 === 2: p2Win(); break;
+        case f62 === 1 && f63 === 1 && f64 === 1 && f65 === 1: p1Win(); break;
+        case f62 === 2 && f63 === 2 && f64 === 2 && f65 === 2: p2Win(); break;
+        case f63 === 1 && f64 === 1 && f65 === 1 && f66 === 1: p1Win(); break;
+        case f63 === 2 && f64 === 2 && f65 === 2 && f66 === 2: p2Win(); break;
+        case f64 === 1 && f65 === 1 && f66 === 1 && f67 === 1: p1Win(); break;
+        case f64 === 2 && f65 === 2 && f66 === 2 && f67 === 2: p2Win(); break;
+        case f51 === 1 && f52 === 1 && f53 === 1 && f54 === 1: p1Win(); break;
+        case f51 === 2 && f52 === 2 && f53 === 2 && f54 === 2: p2Win(); break;
+        case f52 === 1 && f53 === 1 && f54 === 1 && f55 === 1: p1Win(); break;
+        case f52 === 2 && f53 === 2 && f54 === 2 && f55 === 2: p2Win(); break;
+        case f53 === 1 && f54 === 1 && f55 === 1 && f56 === 1: p1Win(); break;
+        case f53 === 2 && f54 === 2 && f55 === 2 && f56 === 2: p2Win(); break;
+        case f54 === 1 && f55 === 1 && f56 === 1 && f57 === 1: p1Win(); break;
+        case f54 === 2 && f55 === 2 && f56 === 2 && f57 === 2: p2Win(); break;
+        case f41 === 1 && f42 === 1 && f43 === 1 && f44 === 1: p1Win(); break;
+        case f41 === 2 && f42 === 2 && f43 === 2 && f44 === 2: p2Win(); break;
+        case f42 === 1 && f43 === 1 && f44 === 1 && f45 === 1: p1Win(); break;
+        case f42 === 2 && f43 === 2 && f44 === 2 && f45 === 2: p2Win(); break;
+        case f43 === 1 && f44 === 1 && f45 === 1 && f46 === 1: p1Win(); break;
+        case f43 === 2 && f44 === 2 && f45 === 2 && f46 === 2: p2Win(); break;
+        case f44 === 1 && f45 === 1 && f46 === 1 && f47 === 1: p1Win(); break;
+        case f44 === 2 && f45 === 2 && f46 === 2 && f47 === 2: p2Win(); break;
+        case f31 === 1 && f32 === 1 && f33 === 1 && f34 === 1: p1Win(); break;
+        case f31 === 2 && f32 === 2 && f33 === 2 && f34 === 2: p2Win(); break;
+        case f32 === 1 && f33 === 1 && f34 === 1 && f35 === 1: p1Win(); break;
+        case f32 === 2 && f33 === 2 && f34 === 2 && f35 === 2: p2Win(); break;
+        case f33 === 1 && f34 === 1 && f35 === 1 && f36 === 1: p1Win(); break;
+        case f33 === 2 && f34 === 2 && f35 === 2 && f36 === 2: p2Win(); break;
+        case f34 === 1 && f35 === 1 && f36 === 1 && f37 === 1: p1Win(); break;
+        case f34 === 2 && f35 === 2 && f36 === 2 && f37 === 2: p2Win(); break;
+        case f21 === 1 && f22 === 1 && f23 === 1 && f24 === 1: p1Win(); break;
+        case f21 === 2 && f22 === 2 && f23 === 2 && f24 === 2: p2Win(); break;
+        case f22 === 1 && f23 === 1 && f24 === 1 && f25 === 1: p1Win(); break;
+        case f22 === 2 && f23 === 2 && f24 === 2 && f25 === 2: p2Win(); break;
+        case f23 === 1 && f24 === 1 && f25 === 1 && f26 === 1: p1Win(); break;
+        case f23 === 2 && f24 === 2 && f25 === 2 && f26 === 2: p2Win(); break;
+        case f24 === 1 && f25 === 1 && f26 === 1 && f27 === 1: p1Win(); break;
+        case f24 === 2 && f25 === 2 && f26 === 2 && f27 === 2: p2Win(); break;
+        case f11 === 1 && f12 === 1 && f13 === 1 && f14 === 1: p1Win(); break;
+        case f11 === 2 && f12 === 2 && f13 === 2 && f14 === 2: p2Win(); break;
+        case f12 === 1 && f13 === 1 && f14 === 1 && f15 === 1: p1Win(); break;
+        case f12 === 2 && f13 === 2 && f14 === 2 && f15 === 2: p2Win(); break;
+        case f13 === 1 && f14 === 1 && f15 === 1 && f16 === 1: p1Win(); break;
+        case f13 === 2 && f14 === 2 && f15 === 2 && f16 === 2: p2Win(); break;
+        case f14 === 1 && f15 === 1 && f16 === 1 && f17 === 1: p1Win(); break;
+        case f14 === 2 && f15 === 2 && f16 === 2 && f17 === 2: p2Win(); break;
+        // growing /
+        case f41 === 1 && f32 === 1 && f23 === 1 && f14 === 1: p1Win(); break;
+        case f41 === 2 && f32 === 2 && f23 === 2 && f14 === 2: p2Win(); break;
+        case f51 === 1 && f42 === 1 && f33 === 1 && f24 === 1: p1Win(); break;
+        case f51 === 2 && f42 === 2 && f33 === 2 && f24 === 2: p2Win(); break;
+        case f42 === 1 && f33 === 1 && f24 === 1 && f15 === 1: p1Win(); break;
+        case f42 === 2 && f33 === 2 && f24 === 2 && f15 === 2: p2Win(); break;
+        case f61 === 1 && f52 === 1 && f43 === 1 && f34 === 1: p1Win(); break;
+        case f61 === 2 && f52 === 2 && f43 === 2 && f34 === 2: p2Win(); break;
+        case f52 === 1 && f43 === 1 && f34 === 1 && f25 === 1: p1Win(); break;
+        case f52 === 2 && f43 === 2 && f34 === 2 && f25 === 2: p2Win(); break;
+        case f43 === 1 && f34 === 1 && f25 === 1 && f16 === 1: p1Win(); break;
+        case f43 === 2 && f34 === 2 && f25 === 2 && f16 === 2: p2Win(); break;
+        case f62 === 1 && f53 === 1 && f44 === 1 && f35 === 1: p1Win(); break;
+        case f62 === 2 && f53 === 2 && f44 === 2 && f35 === 2: p2Win(); break;
+        case f53 === 1 && f44 === 1 && f35 === 1 && f26 === 1: p1Win(); break;
+        case f53 === 2 && f44 === 2 && f35 === 2 && f26 === 2: p2Win(); break;
+        case f44 === 1 && f35 === 1 && f26 === 1 && f17 === 1: p1Win(); break;
+        case f44 === 2 && f35 === 2 && f26 === 2 && f17 === 2: p2Win(); break;
+        case f63 === 1 && f54 === 1 && f45 === 1 && f36 === 1: p1Win(); break;
+        case f63 === 2 && f54 === 2 && f45 === 2 && f36 === 2: p2Win(); break;
+        case f54 === 1 && f45 === 1 && f36 === 1 && f27 === 1: p1Win(); break;
+        case f54 === 2 && f45 === 2 && f36 === 2 && f27 === 2: p2Win(); break;
+        case f64 === 1 && f55 === 1 && f46 === 1 && f37 === 1: p1Win(); break;
+        case f64 === 2 && f55 === 2 && f46 === 2 && f37 === 2: p2Win(); break;
+        // decline \
+        case f64 === 1 && f53 === 1 && f42 === 1 && f31 === 1: p1Win(); break;
+        case f64 === 2 && f53 === 2 && f42 === 2 && f31 === 2: p2Win(); break;
+        case f65 === 1 && f54 === 1 && f43 === 1 && f32 === 1: p1Win(); break;
+        case f65 === 2 && f54 === 2 && f43 === 2 && f32 === 2: p2Win(); break;
+        case f54 === 1 && f43 === 1 && f32 === 1 && f21 === 1: p1Win(); break;
+        case f54 === 2 && f43 === 2 && f32 === 2 && f21 === 2: p2Win(); break;
+        case f66 === 1 && f55 === 1 && f44 === 1 && f33 === 1: p1Win(); break;
+        case f66 === 2 && f55 === 2 && f44 === 2 && f33 === 2: p2Win(); break;
+        case f55 === 1 && f44 === 1 && f33 === 1 && f22 === 1: p1Win(); break;
+        case f55 === 2 && f44 === 2 && f33 === 2 && f22 === 2: p2Win(); break;
+        case f44 === 1 && f33 === 1 && f22 === 1 && f11 === 1: p1Win(); break;
+        case f44 === 2 && f33 === 2 && f22 === 2 && f11 === 2: p2Win(); break;
+        case f67 === 1 && f56 === 1 && f45 === 1 && f34 === 1: p1Win(); break;
+        case f67 === 2 && f56 === 2 && f45 === 2 && f34 === 2: p2Win(); break;
+        case f56 === 1 && f45 === 1 && f34 === 1 && f23 === 1: p1Win(); break;
+        case f56 === 2 && f45 === 2 && f34 === 2 && f23 === 2: p2Win(); break;
+        case f45 === 1 && f34 === 1 && f23 === 1 && f12 === 1: p1Win(); break;
+        case f45 === 2 && f34 === 2 && f23 === 2 && f12 === 2: p2Win(); break;
+        case f57 === 1 && f46 === 1 && f35 === 1 && f24 === 1: p1Win(); break;
+        case f57 === 2 && f46 === 2 && f35 === 2 && f24 === 2: p2Win(); break;
+        case f46 === 1 && f35 === 1 && f24 === 1 && f13 === 1: p1Win(); break;
+        case f46 === 2 && f35 === 2 && f24 === 2 && f13 === 2: p2Win(); break;
+        case f47 === 1 && f36 === 1 && f25 === 1 && f14 === 1: p1Win(); break;
+        case f47 === 2 && f36 === 2 && f25 === 2 && f14 === 2: p2Win(); break;
+    }
+}
+function p1Win(){
+    turn.css("color","green");
+    turn.text("PLAYER *1* WINS!!!");
+    turn.css("font-size","10vh");
+    player = 3;
+    winner = 1;
+}
+function p2Win(){
+    turn.css("color","green");
+    turn.text("PLAYER *2* WINS!!!");
+    turn.css("font-size","10vh");
+    player = 3;
+    winner = 2;
+}
 
 var f11 = 0;
 var f21 = 0;
