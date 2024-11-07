@@ -2,79 +2,41 @@ var turn = $("h2");
 var game = 0;
 var player = 0;
 var winner = 0;
+var info = 0;
+var f1 = $(".f1");
+var f2 = $(".f2");
+var f3 = $(".f3");
+var f4 = $(".f4");
+var f5 = $(".f5");
+var f6 = $(".f6");
+var f7 = $(".f7");
 //Row changing color on hover
-function changeColorf1(size, color){
-    for(var i = 0; i< f1.length; i++){
-        f1[i].style.border = size +"px dashed "+ color;
+function changeColor(className, size, color){
+    for(var i = 0; i < window[className].length; i++){
+        window[className][i].style.border = size + "px dashed " + color;
     }
-}var f1 = $(".f1");
-for(var i = 0; i < f1.length; i++){
-    f1[i].onmouseover = function(){changeColorf1("3","green");}
-    f1[i].onmouseout = function(){changeColorf1("2","brown");}
 }
-function changeColorf2(size, color){
-    for(var i = 0; i< f2.length; i++){
-        f2[i].style.border = size +"px dashed "+ color;
+for(var i = 1; i <= 7 ; i++){
+    let classX = "f"+ i; 
+    for(var j = 0; j < window[classX].length; j++){
+        window[classX][j].onmouseover = function(){changeColor(classX, 3, "green");}
+        window[classX][j].onmouseout = function(){changeColor(classX, 2, "brown");}
     }
-}var f2 = $(".f2");
-for(var i = 0; i < f2.length; i++){
-    f2[i].onmouseover = function(){changeColorf2("3","green");}
-    f2[i].onmouseout = function(){changeColorf2("2","brown");}
-}
-function changeColorf3(size, color){
-    for(var i = 0; i< f3.length; i++){
-        f3[i].style.border = size +"px dashed "+ color;
-    }
-}var f3 = $(".f3");
-for(var i = 0; i < f3.length; i++){
-    f3[i].onmouseover = function(){changeColorf3("3","green");}
-    f3[i].onmouseout = function(){changeColorf3("2","brown");}
-}
-function changeColorf4(size, color){
-    for(var i = 0; i< f4.length; i++){
-        f4[i].style.border = size +"px dashed "+ color;
-    }
-}var f4 = $(".f4");
-for(var i = 0; i < f1.length; i++){
-    f4[i].onmouseover = function(){changeColorf4("3","green");}
-    f4[i].onmouseout = function(){changeColorf4("2","brown");}
-}
-function changeColorf5(size, color){
-    for(var i = 0; i< f5.length; i++){
-        f5[i].style.border = size +"px dashed "+ color;
-    }
-}var f5 = $(".f5");
-for(var i = 0; i < f5.length; i++){
-    f5[i].onmouseover = function(){changeColorf5("3","green");}
-    f5[i].onmouseout = function(){changeColorf5("2","brown");}
-}
-function changeColorf6(size, color){
-    for(var i = 0; i< f6.length; i++){
-        f6[i].style.border = size +"px dashed "+ color;
-    }
-}var f6 = $(".f6");
-for(var i = 0; i < f6.length; i++){
-    f6[i].onmouseover = function(){changeColorf6("3","green");}
-    f6[i].onmouseout = function(){changeColorf6("2","brown");}
-}
-function changeColorf7(size, color){
-    for(var i = 0; i< f7.length; i++){
-        f7[i].style.border = size +"px dashed "+ color;
-    }
-}var f7 = $(".f7");
-for(var i = 0; i < f7.length; i++){
-    f7[i].onmouseover = function(){changeColorf7("3","green");}
-    f7[i].onmouseout = function(){changeColorf7("2","brown");}
 }
 //start
 $(".start").click(function(){
-    if(game === 0){
-        player1();
-        game = 1;
-
+    if(info === 0){
+        if(game === 0){
+            player1();
+            game = 1;
+    
+        }
+        else{
+            alert("Game is already running.");
+        }
     }
     else{
-        alert("Game is already running.");
+        alert("You are looking at info!!!\nPress Back button!")
     }
 })
 //change players
@@ -887,7 +849,49 @@ function p2Win(){
     player = 3;
     winner = 2;
 }
-
+//Restart
+$(".restart").click(function(){
+    game = 0;
+    player = 0;
+    winner = 0;
+    turn.css("color","black");
+    turn.text("Press start!");
+    turn.css("font-size","5vh");
+    for(var i = 1; i < 7;i++){
+        for(var j = 1; j <= 7; j++){
+            $(".h"+i+j).css("background","wheat");
+        }
+    }
+    for(var i = 1; i < 7; i++){
+        for(var j = 1; j <= 7; j++){
+            backTo0("f"+i+j);
+        }
+    }
+})
+function backTo0(fxx){
+    window[fxx] = 0;
+}
+//Info
+$(".info").click(function(){
+    
+    if(game === 1){
+        alert("Game is running!!!\nIf you want to see info restart game and press Info button!");
+    }
+    else if(game === 0){
+        if(info === 0){
+            $(".Game").css("display","none");
+            $(".description").css("display","flex");
+            $(".info").text("Back");
+            info++;
+        }
+        else if(info === 1){
+            $(".Game").css("display","grid");
+            $(".description").css("display","none");
+            $(".info").text("Info");
+            info--;
+        }
+    }
+})
 var f11 = 0;
 var f21 = 0;
 var f31 = 0;
