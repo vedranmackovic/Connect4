@@ -144,7 +144,7 @@ button:hover{
     }
     .Game{
         height: 50%;
-        gap: 2%;
+        gap: 2.5%;
         padding: 3%;
         max-width: 90%;
         min-width: 90%;
@@ -159,5 +159,18 @@ button:hover{
         font-size: 1.5vh;
         width: 100%;
         margin-top: auto;
+    }
+    .description{
+        width: 90%;
+        height: 110%;
+    }
+    .description br{
+        display: none;
+    }
+    button:hover{
+        background-color: wheat
+    }
+    button:active{
+        background-color: darkorange;
     }
 }
