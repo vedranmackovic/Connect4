@@ -3,6 +3,8 @@ var game = 0;
 var player = 0;
 var winner = 0;
 var info = 0;
+var color = "";
+var columns = [, 6, 6, 6, 6, 6, 6, 6];
 var f1 = $(".f1");
 var f2 = $(".f2");
 var f3 = $(".f3");
@@ -17,17 +19,33 @@ function changeColor(className, size, color){
     }
 }
 for(var i = 1; i <= 7 ; i++){
+    let column = i;
     let classX = "f"+ i; 
     for(var j = 0; j < window[classX].length; j++){
         window[classX][j].onmouseover = function(){changeColor(classX, 3, "green");}
-        window[classX][j].onmouseout = function(){changeColor(classX, 2, "brown");}
+        window[classX][j].onmouseout = function(){changeColor(classX, 2, "brown");}   
     }
+    //Game for each row
+    window[classX].click(function(){
+        if(game === 1){
+            var row = columns[column];
+            let rowcol =""+row+column;
+            if(columns[column]>0){
+                $(".h"+rowcol).css("background", color);
+                columns[column]--;
+                window["f"+rowcol]= player;
+                playerRound(player);
+            }                    
+        }
+        victory();
+        draw();
+    })
 }
 //start
 $(".start").click(function(){
     if(info === 0){
         if(game === 0){
-            player1();
+            playerRound(2);
             game = 1;
     
         }
@@ -40,647 +58,19 @@ $(".start").click(function(){
     }
 })
 //change players
-function player1(){
-    turn.css("color","blue");
-    turn.text("Player 1's turn");
-    player = 1;
+function playerRound(n){
+    if(n===1){
+        color = "red";
+        turn.css("color",color);
+        player = 2;
+    }
+    else if(n===2){
+        color = "blue";
+        turn.css("color",color);
+        player = 1;
+    }
+    turn.text("Player "+player+"'s turn");    
 }
-function player2(){
-    turn.css("color","red");
-    turn.text("Player 2's turn");
-    player = 2;
-}
-//game for each row
-f1.click(function(){
-    if(game === 1){
-        if(player === 1){
-            if(f11 === 0){
-                if(f21===0){
-                    if(f31===0){
-                        if(f41===0){
-                            if(f51===0){
-                                if(f61===0){
-                                    $(".h61").css("background", "blue");
-                                    f61=1;
-                                    player2();
-                                }
-                                else{
-                                    $(".h51").css("background","blue");
-                                    f51=1;
-                                    player2();
-                                }
-                            }
-                            else{
-                                $(".h41").css("background","blue");
-                                f41=1;
-                                player2();
-                            }
-                        }
-                        else{
-                            $(".h31").css("background","blue");
-                            f31=1;
-                            player2();
-                        }
-                    }
-                    else{
-                        $(".h21").css("background","blue");
-                        f21=1;
-                        player2();
-                    }
-                }
-                else{
-                    $(".h11").css("background","blue");
-                    f11=1;
-                    player2();
-                }
-            }
-        }
-        else if(player === 2){
-            if(f11 === 0){
-                if(f21===0){
-                    if(f31===0){
-                        if(f41===0){
-                            if(f51===0){
-                                if(f61===0){
-                                    $(".h61").css("background", "red");
-                                    f61=2;
-                                    player1();
-                                }
-                                else{
-                                    $(".h51").css("background","red");
-                                    f51=2;
-                                    player1();
-                                }
-                            }
-                            else{
-                                $(".h41").css("background","red");
-                                f41=2;
-                                player1();
-                            }
-                        }
-                        else{
-                            $(".h31").css("background","red");
-                            f31=2;
-                            player1();
-                        }
-                    }
-                    else{
-                        $(".h21").css("background","red");
-                        f21=2;
-                        player1();
-                    }
-                }
-                else{
-                    $(".h11").css("background","red");
-                    f11=2;
-                    player1();
-                }
-            }
-        }
-    }
-    victory();
-    draw();
-}) 
-f2.click(function(){
-    if(game === 1){
-        if(player === 1){
-            if(f12 === 0){
-                if(f22===0){
-                    if(f32===0){
-                        if(f42===0){
-                            if(f52===0){
-                                if(f62===0){
-                                    $(".h62").css("background", "blue");
-                                    f62=1;
-                                    player2();
-                                }
-                                else{
-                                    $(".h52").css("background","blue");
-                                    f52=1;
-                                    player2();
-                                }
-                            }
-                            else{
-                                $(".h42").css("background","blue");
-                                f42=1;
-                                player2();
-                            }
-                        }
-                        else{
-                            $(".h32").css("background","blue");
-                            f32=1;
-                            player2();
-                        }
-                    }
-                    else{
-                        $(".h22").css("background","blue");
-                        f22=1;
-                        player2();
-                    }
-                }
-                else{
-                    $(".h12").css("background","blue");
-                    f12=1;
-                    player2();
-                }
-            }
-        }
-        else if(player === 2){
-            if(f12 === 0){
-                if(f22===0){
-                    if(f32===0){
-                        if(f42===0){
-                            if(f52===0){
-                                if(f62===0){
-                                    $(".h62").css("background", "red");
-                                    f62=2;
-                                    player1();
-                                }
-                                else{
-                                    $(".h52").css("background","red");
-                                    f52=2;
-                                    player1();
-                                }
-                            }
-                            else{
-                                $(".h42").css("background","red");
-                                f42=2;
-                                player1();
-                            }
-                        }
-                        else{
-                            $(".h32").css("background","red");
-                            f32=2;
-                            player1();
-                        }
-                    }
-                    else{
-                        $(".h22").css("background","red");
-                        f22=2;
-                        player1();
-                    }
-                }
-                else{
-                    $(".h12").css("background","red");
-                    f12=2;
-                    player1();
-                }
-            }
-        }
-    }
-    victory();
-    draw();
-})
-f3.click(function(){
-    if(game === 1){
-        if(player === 1){
-            if(f13 === 0){
-                if(f23===0){
-                    if(f33===0){
-                        if(f43===0){
-                            if(f53===0){
-                                if(f63===0){
-                                    $(".h63").css("background", "blue");
-                                    f63=1;
-                                    player2();
-                                }
-                                else{
-                                    $(".h53").css("background","blue");
-                                    f53=1;
-                                    player2();
-                                }
-                            }
-                            else{
-                                $(".h43").css("background","blue");
-                                f43=1;
-                                player2();
-                            }
-                        }
-                        else{
-                            $(".h33").css("background","blue");
-                            f33=1;
-                            player2();
-                        }
-                    }
-                    else{
-                        $(".h23").css("background","blue");
-                        f23=1;
-                        player2();
-                    }
-                }
-                else{
-                    $(".h13").css("background","blue");
-                    f13=1;
-                    player2();
-                }
-            }
-        }
-        else if(player === 2){
-            if(f13 === 0){
-                if(f23===0){
-                    if(f33===0){
-                        if(f43===0){
-                            if(f53===0){
-                                if(f63===0){
-                                    $(".h63").css("background", "red");
-                                    f63=2;
-                                    player1();
-                                }
-                                else{
-                                    $(".h53").css("background","red");
-                                    f53=2;
-                                    player1();
-                                }
-                            }
-                            else{
-                                $(".h43").css("background","red");
-                                f43=2;
-                                player1();
-                            }
-                        }
-                        else{
-                            $(".h33").css("background","red");
-                            f33=2;
-                            player1();
-                        }
-                    }
-                    else{
-                        $(".h23").css("background","red");
-                        f23=2;
-                        player1();
-                    }
-                }
-                else{
-                    $(".h13").css("background","red");
-                    f13=2;
-                    player1();
-                }
-            }
-        }
-    }
-    victory();
-    draw();
-})
-f4.click(function(){
-    if(game === 1){
-        if(player === 1){
-            if(f14 === 0){
-                if(f24===0){
-                    if(f34===0){
-                        if(f44===0){
-                            if(f54===0){
-                                if(f64===0){
-                                    $(".h64").css("background", "blue");
-                                    f64=1;
-                                    player2();
-                                }
-                                else{
-                                    $(".h54").css("background","blue");
-                                    f54=1;
-                                    player2();
-                                }
-                            }
-                            else{
-                                $(".h44").css("background","blue");
-                                f44=1;
-                                player2();
-                            }
-                        }
-                        else{
-                            $(".h34").css("background","blue");
-                            f34=1;
-                            player2();
-                        }
-                    }
-                    else{
-                        $(".h24").css("background","blue");
-                        f24=1;
-                        player2();
-                    }
-                }
-                else{
-                    $(".h14").css("background","blue");
-                    f14=1;
-                    player2();
-                }
-            }
-        }
-        else if(player === 2){
-            if(f14 === 0){
-                if(f24===0){
-                    if(f34===0){
-                        if(f44===0){
-                            if(f54===0){
-                                if(f64===0){
-                                    $(".h64").css("background", "red");
-                                    f64=2;
-                                    player1();
-                                }
-                                else{
-                                    $(".h54").css("background","red");
-                                    f54=2;
-                                    player1();
-                                }
-                            }
-                            else{
-                                $(".h44").css("background","red");
-                                f44=2;
-                                player1();
-                            }
-                        }
-                        else{
-                            $(".h34").css("background","red");
-                            f34=2;
-                            player1();
-                        }
-                    }
-                    else{
-                        $(".h24").css("background","red");
-                        f24=2;
-                        player1();
-                    }
-                }
-                else{
-                    $(".h14").css("background","red");
-                    f14=2;
-                    player1();
-                }
-            }
-        }
-    }
-    victory();
-    draw();
-})
-f5.click(function(){
-    if(game === 1){
-        if(player === 1){
-            if(f15 === 0){
-                if(f25===0){
-                    if(f35===0){
-                        if(f45===0){
-                            if(f55===0){
-                                if(f65===0){
-                                    $(".h65").css("background", "blue");
-                                    f65=1;
-                                    player2();
-                                }
-                                else{
-                                    $(".h55").css("background","blue");
-                                    f55=1;
-                                    player2();
-                                }
-                            }
-                            else{
-                                $(".h45").css("background","blue");
-                                f45=1;
-                                player2();
-                            }
-                        }
-                        else{
-                            $(".h35").css("background","blue");
-                            f35=1;
-                            player2();
-                        }
-                    }
-                    else{
-                        $(".h25").css("background","blue");
-                        f25=1;
-                        player2();
-                    }
-                }
-                else{
-                    $(".h15").css("background","blue");
-                    f15=1;
-                    player2();
-                }
-            }
-        }
-        else if(player === 2){
-            if(f15 === 0){
-                if(f25===0){
-                    if(f35===0){
-                        if(f45===0){
-                            if(f55===0){
-                                if(f65===0){
-                                    $(".h65").css("background", "red");
-                                    f65=2;
-                                    player1();
-                                }
-                                else{
-                                    $(".h55").css("background","red");
-                                    f55=2;
-                                    player1();
-                                }
-                            }
-                            else{
-                                $(".h45").css("background","red");
-                                f45=2;
-                                player1();
-                            }
-                        }
-                        else{
-                            $(".h35").css("background","red");
-                            f35=2;
-                            player1();
-                        }
-                    }
-                    else{
-                        $(".h25").css("background","red");
-                        f25=2;
-                        player1();
-                    }
-                }
-                else{
-                    $(".h15").css("background","red");
-                    f15=2;
-                    player1();
-                }
-            }
-        }
-    }
-    victory();
-    draw();
-})
-f6.click(function(){
-    if(game === 1){
-        if(player === 1){
-            if(f16 === 0){
-                if(f26===0){
-                    if(f36===0){
-                        if(f46===0){
-                            if(f56===0){
-                                if(f66===0){
-                                    $(".h66").css("background", "blue");
-                                    f66=1;
-                                    player2();
-                                }
-                                else{
-                                    $(".h56").css("background","blue");
-                                    f56=1;
-                                    player2();
-                                }
-                            }
-                            else{
-                                $(".h46").css("background","blue");
-                                f46=1;
-                                player2();
-                            }
-                        }
-                        else{
-                            $(".h36").css("background","blue");
-                            f36=1;
-                            player2();
-                        }
-                    }
-                    else{
-                        $(".h26").css("background","blue");
-                        f26=1;
-                        player2();
-                    }
-                }
-                else{
-                    $(".h16").css("background","blue");
-                    f16=1;
-                    player2();
-                }
-            }
-        }
-        else if(player === 2){
-            if(f16 === 0){
-                if(f26===0){
-                    if(f36===0){
-                        if(f46===0){
-                            if(f56===0){
-                                if(f66===0){
-                                    $(".h66").css("background", "red");
-                                    f66=2;
-                                    player1();
-                                }
-                                else{
-                                    $(".h56").css("background","red");
-                                    f56=2;
-                                    player1();
-                                }
-                            }
-                            else{
-                                $(".h46").css("background","red");
-                                f46=2;
-                                player1();
-                            }
-                        }
-                        else{
-                            $(".h36").css("background","red");
-                            f36=2;
-                            player1();
-                        }
-                    }
-                    else{
-                        $(".h26").css("background","red");
-                        f26=2;
-                        player1();
-                    }
-                }
-                else{
-                    $(".h16").css("background","red");
-                    f16=2;
-                    player1();
-                }
-            }
-        }
-    }
-    victory();
-    draw();
-}) 
-f7.click(function(){
-    if(game === 1){
-        if(player === 1){
-            if(f17 === 0){
-                if(f27===0){
-                    if(f37===0){
-                        if(f47===0){
-                            if(f57===0){
-                                if(f67===0){
-                                    $(".h67").css("background", "blue");
-                                    f67=1;
-                                    player2();
-                                }
-                                else{
-                                    $(".h57").css("background","blue");
-                                    f57=1;
-                                    player2();
-                                }
-                            }
-                            else{
-                                $(".h47").css("background","blue");
-                                f47=1;
-                                player2();
-                            }
-                        }
-                        else{
-                            $(".h37").css("background","blue");
-                            f37=1;
-                            player2();
-                        }
-                    }
-                    else{
-                        $(".h27").css("background","blue");
-                        f27=1;
-                        player2();
-                    }
-                }
-                else{
-                    $(".h17").css("background","blue");
-                    f17=1;
-                    player2();
-                }
-            }
-        }
-        else if(player === 2){
-            if(f17 === 0){
-                if(f27===0){
-                    if(f37===0){
-                        if(f47===0){
-                            if(f57===0){
-                                if(f67===0){
-                                    $(".h67").css("background", "red");
-                                    f67=2;
-                                    player1();
-                                }
-                                else{
-                                    $(".h57").css("background","red");
-                                    f57=2;
-                                    player1();
-                                }
-                            }
-                            else{
-                                $(".h47").css("background","red");
-                                f47=2;
-                                player1();
-                            }
-                        }
-                        else{
-                            $(".h37").css("background","red");
-                            f37=2;
-                            player1();
-                        }
-                    }
-                    else{
-                        $(".h27").css("background","red");
-                        f27=2;
-                        player1();
-                    }
-                }
-                else{
-                    $(".h17").css("background","red");
-                    f17=2;
-                    player1();
-                }
-            }
-        }
-    }
-    victory();
-    draw();
-}) 
 //draw
 function draw(){
     if (f11 !== 0 && f12 !== 0 && f13 !== 0 && f14 !== 0 && f15 !== 0 && f16 !== 0 && f17 !== 0 && winner === 0){
@@ -692,162 +82,156 @@ function draw(){
 function victory(){
     switch(true){
         //vertical
-        case f61 === 1 && f51 === 1 && f41 === 1 && f31 === 1: p1Win(); break;
-        case f61 === 2 && f51 === 2 && f41 === 2 && f31 === 2: p2Win(); break;
-        case f51 === 1 && f41 === 1 && f31 === 1 && f21 === 1: p1Win(); break;
-        case f51 === 2 && f41 === 2 && f31 === 2 && f21 === 2: p2Win(); break;
-        case f41 === 1 && f31 === 1 && f21 === 1 && f11 === 1: p1Win(); break;
-        case f41 === 2 && f31 === 2 && f21 === 2 && f11 === 2: p2Win(); break;
-        case f62 === 1 && f52 === 1 && f42 === 1 && f32 === 1: p1Win(); break;
-        case f62 === 2 && f52 === 2 && f42 === 2 && f32 === 2: p2Win(); break;
-        case f52 === 1 && f42 === 1 && f32 === 1 && f22 === 1: p1Win(); break;
-        case f52 === 2 && f42 === 2 && f32 === 2 && f22 === 2: p2Win(); break;
-        case f42 === 1 && f32 === 1 && f22 === 1 && f12 === 1: p1Win(); break;
-        case f42 === 2 && f32 === 2 && f22 === 2 && f12 === 2: p2Win(); break;
-        case f63 === 1 && f53 === 1 && f43 === 1 && f33 === 1: p1Win(); break;
-        case f63 === 2 && f53 === 2 && f43 === 2 && f33 === 2: p2Win(); break;
-        case f53 === 1 && f43 === 1 && f33 === 1 && f23 === 1: p1Win(); break;
-        case f53 === 2 && f43 === 2 && f33 === 2 && f23 === 2: p2Win(); break;
-        case f43 === 1 && f33 === 1 && f23 === 1 && f13 === 1: p1Win(); break;
-        case f43 === 2 && f33 === 2 && f23 === 2 && f13 === 2: p2Win(); break;
-        case f64 === 1 && f54 === 1 && f44 === 1 && f34 === 1: p1Win(); break;
-        case f64 === 2 && f54 === 2 && f44 === 2 && f34 === 2: p2Win(); break;
-        case f54 === 1 && f44 === 1 && f34 === 1 && f24 === 1: p1Win(); break;
-        case f54 === 2 && f44 === 2 && f34 === 2 && f24 === 2: p2Win(); break;
-        case f44 === 1 && f34 === 1 && f24 === 1 && f14 === 1: p1Win(); break;
-        case f44 === 2 && f34 === 2 && f24 === 2 && f14 === 2: p2Win(); break;
-        case f65 === 1 && f55 === 1 && f45 === 1 && f35 === 1: p1Win(); break;
-        case f65 === 2 && f55 === 2 && f45 === 2 && f35 === 2: p2Win(); break;
-        case f55 === 1 && f45 === 1 && f35 === 1 && f25 === 1: p1Win(); break;
-        case f55 === 2 && f45 === 2 && f35 === 2 && f25 === 2: p2Win(); break;
-        case f45 === 1 && f35 === 1 && f25 === 1 && f15 === 1: p1Win(); break;
-        case f45 === 2 && f35 === 2 && f25 === 2 && f15 === 2: p2Win(); break;
-        case f66 === 1 && f56 === 1 && f46 === 1 && f36 === 1: p1Win(); break;
-        case f66 === 2 && f56 === 2 && f46 === 2 && f36 === 2: p2Win(); break;
-        case f56 === 1 && f46 === 1 && f36 === 1 && f26 === 1: p1Win(); break;
-        case f56 === 2 && f46 === 2 && f36 === 2 && f26 === 2: p2Win(); break;
-        case f46 === 1 && f36 === 1 && f26 === 1 && f16 === 1: p1Win(); break;
-        case f46 === 2 && f36 === 2 && f26 === 2 && f16 === 2: p2Win(); break;
-        case f67 === 1 && f57 === 1 && f47 === 1 && f37 === 1: p1Win(); break;
-        case f67 === 2 && f57 === 2 && f47 === 2 && f37 === 2: p2Win(); break;
-        case f57 === 1 && f47 === 1 && f37 === 1 && f27 === 1: p1Win(); break;
-        case f57 === 2 && f47 === 2 && f37 === 2 && f27 === 2: p2Win(); break;
-        case f47 === 1 && f37 === 1 && f27 === 1 && f17 === 1: p1Win(); break;
-        case f47 === 2 && f37 === 2 && f27 === 2 && f17 === 2: p2Win(); break;
+        case f61 === 1 && f51 === 1 && f41 === 1 && f31 === 1: Win(1); break;
+        case f61 === 2 && f51 === 2 && f41 === 2 && f31 === 2: Win(2); break;
+        case f51 === 1 && f41 === 1 && f31 === 1 && f21 === 1: Win(1); break;
+        case f51 === 2 && f41 === 2 && f31 === 2 && f21 === 2: Win(2); break;
+        case f41 === 1 && f31 === 1 && f21 === 1 && f11 === 1: Win(1); break;
+        case f41 === 2 && f31 === 2 && f21 === 2 && f11 === 2: Win(2); break;
+        case f62 === 1 && f52 === 1 && f42 === 1 && f32 === 1: Win(1); break;
+        case f62 === 2 && f52 === 2 && f42 === 2 && f32 === 2: Win(2); break;
+        case f52 === 1 && f42 === 1 && f32 === 1 && f22 === 1: Win(1); break;
+        case f52 === 2 && f42 === 2 && f32 === 2 && f22 === 2: Win(2); break;
+        case f42 === 1 && f32 === 1 && f22 === 1 && f12 === 1: Win(1); break;
+        case f42 === 2 && f32 === 2 && f22 === 2 && f12 === 2: Win(2); break;
+        case f63 === 1 && f53 === 1 && f43 === 1 && f33 === 1: Win(1); break;
+        case f63 === 2 && f53 === 2 && f43 === 2 && f33 === 2: Win(2); break;
+        case f53 === 1 && f43 === 1 && f33 === 1 && f23 === 1: Win(1); break;
+        case f53 === 2 && f43 === 2 && f33 === 2 && f23 === 2: Win(2); break;
+        case f43 === 1 && f33 === 1 && f23 === 1 && f13 === 1: Win(1); break;
+        case f43 === 2 && f33 === 2 && f23 === 2 && f13 === 2: Win(2); break;
+        case f64 === 1 && f54 === 1 && f44 === 1 && f34 === 1: Win(1); break;
+        case f64 === 2 && f54 === 2 && f44 === 2 && f34 === 2: Win(2); break;
+        case f54 === 1 && f44 === 1 && f34 === 1 && f24 === 1: Win(1); break;
+        case f54 === 2 && f44 === 2 && f34 === 2 && f24 === 2: Win(2); break;
+        case f44 === 1 && f34 === 1 && f24 === 1 && f14 === 1: Win(1); break;
+        case f44 === 2 && f34 === 2 && f24 === 2 && f14 === 2: Win(2); break;
+        case f65 === 1 && f55 === 1 && f45 === 1 && f35 === 1: Win(1); break;
+        case f65 === 2 && f55 === 2 && f45 === 2 && f35 === 2: Win(2); break;
+        case f55 === 1 && f45 === 1 && f35 === 1 && f25 === 1: Win(1); break;
+        case f55 === 2 && f45 === 2 && f35 === 2 && f25 === 2: Win(2); break;
+        case f45 === 1 && f35 === 1 && f25 === 1 && f15 === 1: Win(1); break;
+        case f45 === 2 && f35 === 2 && f25 === 2 && f15 === 2: Win(2); break;
+        case f66 === 1 && f56 === 1 && f46 === 1 && f36 === 1: Win(1); break;
+        case f66 === 2 && f56 === 2 && f46 === 2 && f36 === 2: Win(2); break;
+        case f56 === 1 && f46 === 1 && f36 === 1 && f26 === 1: Win(1); break;
+        case f56 === 2 && f46 === 2 && f36 === 2 && f26 === 2: Win(2); break;
+        case f46 === 1 && f36 === 1 && f26 === 1 && f16 === 1: Win(1); break;
+        case f46 === 2 && f36 === 2 && f26 === 2 && f16 === 2: Win(2); break;
+        case f67 === 1 && f57 === 1 && f47 === 1 && f37 === 1: Win(1); break;
+        case f67 === 2 && f57 === 2 && f47 === 2 && f37 === 2: Win(2); break;
+        case f57 === 1 && f47 === 1 && f37 === 1 && f27 === 1: Win(1); break;
+        case f57 === 2 && f47 === 2 && f37 === 2 && f27 === 2: Win(2); break;
+        case f47 === 1 && f37 === 1 && f27 === 1 && f17 === 1: Win(1); break;
+        case f47 === 2 && f37 === 2 && f27 === 2 && f17 === 2: Win(2); break;
         //horizontal
-        case f61 === 1 && f62 === 1 && f63 === 1 && f64 === 1: p1Win(); break;
-        case f61 === 2 && f62 === 2 && f63 === 2 && f64 === 2: p2Win(); break;
-        case f62 === 1 && f63 === 1 && f64 === 1 && f65 === 1: p1Win(); break;
-        case f62 === 2 && f63 === 2 && f64 === 2 && f65 === 2: p2Win(); break;
-        case f63 === 1 && f64 === 1 && f65 === 1 && f66 === 1: p1Win(); break;
-        case f63 === 2 && f64 === 2 && f65 === 2 && f66 === 2: p2Win(); break;
-        case f64 === 1 && f65 === 1 && f66 === 1 && f67 === 1: p1Win(); break;
-        case f64 === 2 && f65 === 2 && f66 === 2 && f67 === 2: p2Win(); break;
-        case f51 === 1 && f52 === 1 && f53 === 1 && f54 === 1: p1Win(); break;
-        case f51 === 2 && f52 === 2 && f53 === 2 && f54 === 2: p2Win(); break;
-        case f52 === 1 && f53 === 1 && f54 === 1 && f55 === 1: p1Win(); break;
-        case f52 === 2 && f53 === 2 && f54 === 2 && f55 === 2: p2Win(); break;
-        case f53 === 1 && f54 === 1 && f55 === 1 && f56 === 1: p1Win(); break;
-        case f53 === 2 && f54 === 2 && f55 === 2 && f56 === 2: p2Win(); break;
-        case f54 === 1 && f55 === 1 && f56 === 1 && f57 === 1: p1Win(); break;
-        case f54 === 2 && f55 === 2 && f56 === 2 && f57 === 2: p2Win(); break;
-        case f41 === 1 && f42 === 1 && f43 === 1 && f44 === 1: p1Win(); break;
-        case f41 === 2 && f42 === 2 && f43 === 2 && f44 === 2: p2Win(); break;
-        case f42 === 1 && f43 === 1 && f44 === 1 && f45 === 1: p1Win(); break;
-        case f42 === 2 && f43 === 2 && f44 === 2 && f45 === 2: p2Win(); break;
-        case f43 === 1 && f44 === 1 && f45 === 1 && f46 === 1: p1Win(); break;
-        case f43 === 2 && f44 === 2 && f45 === 2 && f46 === 2: p2Win(); break;
-        case f44 === 1 && f45 === 1 && f46 === 1 && f47 === 1: p1Win(); break;
-        case f44 === 2 && f45 === 2 && f46 === 2 && f47 === 2: p2Win(); break;
-        case f31 === 1 && f32 === 1 && f33 === 1 && f34 === 1: p1Win(); break;
-        case f31 === 2 && f32 === 2 && f33 === 2 && f34 === 2: p2Win(); break;
-        case f32 === 1 && f33 === 1 && f34 === 1 && f35 === 1: p1Win(); break;
-        case f32 === 2 && f33 === 2 && f34 === 2 && f35 === 2: p2Win(); break;
-        case f33 === 1 && f34 === 1 && f35 === 1 && f36 === 1: p1Win(); break;
-        case f33 === 2 && f34 === 2 && f35 === 2 && f36 === 2: p2Win(); break;
-        case f34 === 1 && f35 === 1 && f36 === 1 && f37 === 1: p1Win(); break;
-        case f34 === 2 && f35 === 2 && f36 === 2 && f37 === 2: p2Win(); break;
-        case f21 === 1 && f22 === 1 && f23 === 1 && f24 === 1: p1Win(); break;
-        case f21 === 2 && f22 === 2 && f23 === 2 && f24 === 2: p2Win(); break;
-        case f22 === 1 && f23 === 1 && f24 === 1 && f25 === 1: p1Win(); break;
-        case f22 === 2 && f23 === 2 && f24 === 2 && f25 === 2: p2Win(); break;
-        case f23 === 1 && f24 === 1 && f25 === 1 && f26 === 1: p1Win(); break;
-        case f23 === 2 && f24 === 2 && f25 === 2 && f26 === 2: p2Win(); break;
-        case f24 === 1 && f25 === 1 && f26 === 1 && f27 === 1: p1Win(); break;
-        case f24 === 2 && f25 === 2 && f26 === 2 && f27 === 2: p2Win(); break;
-        case f11 === 1 && f12 === 1 && f13 === 1 && f14 === 1: p1Win(); break;
-        case f11 === 2 && f12 === 2 && f13 === 2 && f14 === 2: p2Win(); break;
-        case f12 === 1 && f13 === 1 && f14 === 1 && f15 === 1: p1Win(); break;
-        case f12 === 2 && f13 === 2 && f14 === 2 && f15 === 2: p2Win(); break;
-        case f13 === 1 && f14 === 1 && f15 === 1 && f16 === 1: p1Win(); break;
-        case f13 === 2 && f14 === 2 && f15 === 2 && f16 === 2: p2Win(); break;
-        case f14 === 1 && f15 === 1 && f16 === 1 && f17 === 1: p1Win(); break;
-        case f14 === 2 && f15 === 2 && f16 === 2 && f17 === 2: p2Win(); break;
+        case f61 === 1 && f62 === 1 && f63 === 1 && f64 === 1: Win(1); break;
+        case f61 === 2 && f62 === 2 && f63 === 2 && f64 === 2: Win(2); break;
+        case f62 === 1 && f63 === 1 && f64 === 1 && f65 === 1: Win(1); break;
+        case f62 === 2 && f63 === 2 && f64 === 2 && f65 === 2: Win(2); break;
+        case f63 === 1 && f64 === 1 && f65 === 1 && f66 === 1: Win(1); break;
+        case f63 === 2 && f64 === 2 && f65 === 2 && f66 === 2: Win(2); break;
+        case f64 === 1 && f65 === 1 && f66 === 1 && f67 === 1: Win(1); break;
+        case f64 === 2 && f65 === 2 && f66 === 2 && f67 === 2: Win(2); break;
+        case f51 === 1 && f52 === 1 && f53 === 1 && f54 === 1: Win(1); break;
+        case f51 === 2 && f52 === 2 && f53 === 2 && f54 === 2: Win(2); break;
+        case f52 === 1 && f53 === 1 && f54 === 1 && f55 === 1: Win(1); break;
+        case f52 === 2 && f53 === 2 && f54 === 2 && f55 === 2: Win(2); break;
+        case f53 === 1 && f54 === 1 && f55 === 1 && f56 === 1: Win(1); break;
+        case f53 === 2 && f54 === 2 && f55 === 2 && f56 === 2: Win(2); break;
+        case f54 === 1 && f55 === 1 && f56 === 1 && f57 === 1: Win(1); break;
+        case f54 === 2 && f55 === 2 && f56 === 2 && f57 === 2: Win(2); break;
+        case f41 === 1 && f42 === 1 && f43 === 1 && f44 === 1: Win(1); break;
+        case f41 === 2 && f42 === 2 && f43 === 2 && f44 === 2: Win(2); break;
+        case f42 === 1 && f43 === 1 && f44 === 1 && f45 === 1: Win(1); break;
+        case f42 === 2 && f43 === 2 && f44 === 2 && f45 === 2: Win(2); break;
+        case f43 === 1 && f44 === 1 && f45 === 1 && f46 === 1: Win(1); break;
+        case f43 === 2 && f44 === 2 && f45 === 2 && f46 === 2: Win(2); break;
+        case f44 === 1 && f45 === 1 && f46 === 1 && f47 === 1: Win(1); break;
+        case f44 === 2 && f45 === 2 && f46 === 2 && f47 === 2: Win(2); break;
+        case f31 === 1 && f32 === 1 && f33 === 1 && f34 === 1: Win(1); break;
+        case f31 === 2 && f32 === 2 && f33 === 2 && f34 === 2: Win(2); break;
+        case f32 === 1 && f33 === 1 && f34 === 1 && f35 === 1: Win(1); break;
+        case f32 === 2 && f33 === 2 && f34 === 2 && f35 === 2: Win(2); break;
+        case f33 === 1 && f34 === 1 && f35 === 1 && f36 === 1: Win(1); break;
+        case f33 === 2 && f34 === 2 && f35 === 2 && f36 === 2: Win(2); break;
+        case f34 === 1 && f35 === 1 && f36 === 1 && f37 === 1: Win(1); break;
+        case f34 === 2 && f35 === 2 && f36 === 2 && f37 === 2: Win(2); break;
+        case f21 === 1 && f22 === 1 && f23 === 1 && f24 === 1: Win(1); break;
+        case f21 === 2 && f22 === 2 && f23 === 2 && f24 === 2: Win(2); break;
+        case f22 === 1 && f23 === 1 && f24 === 1 && f25 === 1: Win(1); break;
+        case f22 === 2 && f23 === 2 && f24 === 2 && f25 === 2: Win(2); break;
+        case f23 === 1 && f24 === 1 && f25 === 1 && f26 === 1: Win(1); break;
+        case f23 === 2 && f24 === 2 && f25 === 2 && f26 === 2: Win(2); break;
+        case f24 === 1 && f25 === 1 && f26 === 1 && f27 === 1: Win(1); break;
+        case f24 === 2 && f25 === 2 && f26 === 2 && f27 === 2: Win(2); break;
+        case f11 === 1 && f12 === 1 && f13 === 1 && f14 === 1: Win(1); break;
+        case f11 === 2 && f12 === 2 && f13 === 2 && f14 === 2: Win(2); break;
+        case f12 === 1 && f13 === 1 && f14 === 1 && f15 === 1: Win(1); break;
+        case f12 === 2 && f13 === 2 && f14 === 2 && f15 === 2: Win(2); break;
+        case f13 === 1 && f14 === 1 && f15 === 1 && f16 === 1: Win(1); break;
+        case f13 === 2 && f14 === 2 && f15 === 2 && f16 === 2: Win(2); break;
+        case f14 === 1 && f15 === 1 && f16 === 1 && f17 === 1: Win(1); break;
+        case f14 === 2 && f15 === 2 && f16 === 2 && f17 === 2: Win(2); break;
         // growing /
-        case f41 === 1 && f32 === 1 && f23 === 1 && f14 === 1: p1Win(); break;
-        case f41 === 2 && f32 === 2 && f23 === 2 && f14 === 2: p2Win(); break;
-        case f51 === 1 && f42 === 1 && f33 === 1 && f24 === 1: p1Win(); break;
-        case f51 === 2 && f42 === 2 && f33 === 2 && f24 === 2: p2Win(); break;
-        case f42 === 1 && f33 === 1 && f24 === 1 && f15 === 1: p1Win(); break;
-        case f42 === 2 && f33 === 2 && f24 === 2 && f15 === 2: p2Win(); break;
-        case f61 === 1 && f52 === 1 && f43 === 1 && f34 === 1: p1Win(); break;
-        case f61 === 2 && f52 === 2 && f43 === 2 && f34 === 2: p2Win(); break;
-        case f52 === 1 && f43 === 1 && f34 === 1 && f25 === 1: p1Win(); break;
-        case f52 === 2 && f43 === 2 && f34 === 2 && f25 === 2: p2Win(); break;
-        case f43 === 1 && f34 === 1 && f25 === 1 && f16 === 1: p1Win(); break;
-        case f43 === 2 && f34 === 2 && f25 === 2 && f16 === 2: p2Win(); break;
-        case f62 === 1 && f53 === 1 && f44 === 1 && f35 === 1: p1Win(); break;
-        case f62 === 2 && f53 === 2 && f44 === 2 && f35 === 2: p2Win(); break;
-        case f53 === 1 && f44 === 1 && f35 === 1 && f26 === 1: p1Win(); break;
-        case f53 === 2 && f44 === 2 && f35 === 2 && f26 === 2: p2Win(); break;
-        case f44 === 1 && f35 === 1 && f26 === 1 && f17 === 1: p1Win(); break;
-        case f44 === 2 && f35 === 2 && f26 === 2 && f17 === 2: p2Win(); break;
-        case f63 === 1 && f54 === 1 && f45 === 1 && f36 === 1: p1Win(); break;
-        case f63 === 2 && f54 === 2 && f45 === 2 && f36 === 2: p2Win(); break;
-        case f54 === 1 && f45 === 1 && f36 === 1 && f27 === 1: p1Win(); break;
-        case f54 === 2 && f45 === 2 && f36 === 2 && f27 === 2: p2Win(); break;
-        case f64 === 1 && f55 === 1 && f46 === 1 && f37 === 1: p1Win(); break;
-        case f64 === 2 && f55 === 2 && f46 === 2 && f37 === 2: p2Win(); break;
+        case f41 === 1 && f32 === 1 && f23 === 1 && f14 === 1: Win(1); break;
+        case f41 === 2 && f32 === 2 && f23 === 2 && f14 === 2: Win(2); break;
+        case f51 === 1 && f42 === 1 && f33 === 1 && f24 === 1: Win(1); break;
+        case f51 === 2 && f42 === 2 && f33 === 2 && f24 === 2: Win(2); break;
+        case f42 === 1 && f33 === 1 && f24 === 1 && f15 === 1: Win(1); break;
+        case f42 === 2 && f33 === 2 && f24 === 2 && f15 === 2: Win(2); break;
+        case f61 === 1 && f52 === 1 && f43 === 1 && f34 === 1: Win(1); break;
+        case f61 === 2 && f52 === 2 && f43 === 2 && f34 === 2: Win(2); break;
+        case f52 === 1 && f43 === 1 && f34 === 1 && f25 === 1: Win(1); break;
+        case f52 === 2 && f43 === 2 && f34 === 2 && f25 === 2: Win(2); break;
+        case f43 === 1 && f34 === 1 && f25 === 1 && f16 === 1: Win(1); break;
+        case f43 === 2 && f34 === 2 && f25 === 2 && f16 === 2: Win(2); break;
+        case f62 === 1 && f53 === 1 && f44 === 1 && f35 === 1: Win(1); break;
+        case f62 === 2 && f53 === 2 && f44 === 2 && f35 === 2: Win(2); break;
+        case f53 === 1 && f44 === 1 && f35 === 1 && f26 === 1: Win(1); break;
+        case f53 === 2 && f44 === 2 && f35 === 2 && f26 === 2: Win(2); break;
+        case f44 === 1 && f35 === 1 && f26 === 1 && f17 === 1: Win(1); break;
+        case f44 === 2 && f35 === 2 && f26 === 2 && f17 === 2: Win(2); break;
+        case f63 === 1 && f54 === 1 && f45 === 1 && f36 === 1: Win(1); break;
+        case f63 === 2 && f54 === 2 && f45 === 2 && f36 === 2: Win(2); break;
+        case f54 === 1 && f45 === 1 && f36 === 1 && f27 === 1: Win(1); break;
+        case f54 === 2 && f45 === 2 && f36 === 2 && f27 === 2: Win(2); break;
+        case f64 === 1 && f55 === 1 && f46 === 1 && f37 === 1: Win(1); break;
+        case f64 === 2 && f55 === 2 && f46 === 2 && f37 === 2: Win(2); break;
         // decline \
-        case f64 === 1 && f53 === 1 && f42 === 1 && f31 === 1: p1Win(); break;
-        case f64 === 2 && f53 === 2 && f42 === 2 && f31 === 2: p2Win(); break;
-        case f65 === 1 && f54 === 1 && f43 === 1 && f32 === 1: p1Win(); break;
-        case f65 === 2 && f54 === 2 && f43 === 2 && f32 === 2: p2Win(); break;
-        case f54 === 1 && f43 === 1 && f32 === 1 && f21 === 1: p1Win(); break;
-        case f54 === 2 && f43 === 2 && f32 === 2 && f21 === 2: p2Win(); break;
-        case f66 === 1 && f55 === 1 && f44 === 1 && f33 === 1: p1Win(); break;
-        case f66 === 2 && f55 === 2 && f44 === 2 && f33 === 2: p2Win(); break;
-        case f55 === 1 && f44 === 1 && f33 === 1 && f22 === 1: p1Win(); break;
-        case f55 === 2 && f44 === 2 && f33 === 2 && f22 === 2: p2Win(); break;
-        case f44 === 1 && f33 === 1 && f22 === 1 && f11 === 1: p1Win(); break;
-        case f44 === 2 && f33 === 2 && f22 === 2 && f11 === 2: p2Win(); break;
-        case f67 === 1 && f56 === 1 && f45 === 1 && f34 === 1: p1Win(); break;
-        case f67 === 2 && f56 === 2 && f45 === 2 && f34 === 2: p2Win(); break;
-        case f56 === 1 && f45 === 1 && f34 === 1 && f23 === 1: p1Win(); break;
-        case f56 === 2 && f45 === 2 && f34 === 2 && f23 === 2: p2Win(); break;
-        case f45 === 1 && f34 === 1 && f23 === 1 && f12 === 1: p1Win(); break;
-        case f45 === 2 && f34 === 2 && f23 === 2 && f12 === 2: p2Win(); break;
-        case f57 === 1 && f46 === 1 && f35 === 1 && f24 === 1: p1Win(); break;
-        case f57 === 2 && f46 === 2 && f35 === 2 && f24 === 2: p2Win(); break;
-        case f46 === 1 && f35 === 1 && f24 === 1 && f13 === 1: p1Win(); break;
-        case f46 === 2 && f35 === 2 && f24 === 2 && f13 === 2: p2Win(); break;
-        case f47 === 1 && f36 === 1 && f25 === 1 && f14 === 1: p1Win(); break;
-        case f47 === 2 && f36 === 2 && f25 === 2 && f14 === 2: p2Win(); break;
+        case f64 === 1 && f53 === 1 && f42 === 1 && f31 === 1: Win(1); break;
+        case f64 === 2 && f53 === 2 && f42 === 2 && f31 === 2: Win(2); break;
+        case f65 === 1 && f54 === 1 && f43 === 1 && f32 === 1: Win(1); break;
+        case f65 === 2 && f54 === 2 && f43 === 2 && f32 === 2: Win(2); break;
+        case f54 === 1 && f43 === 1 && f32 === 1 && f21 === 1: Win(1); break;
+        case f54 === 2 && f43 === 2 && f32 === 2 && f21 === 2: Win(2); break;
+        case f66 === 1 && f55 === 1 && f44 === 1 && f33 === 1: Win(1); break;
+        case f66 === 2 && f55 === 2 && f44 === 2 && f33 === 2: Win(2); break;
+        case f55 === 1 && f44 === 1 && f33 === 1 && f22 === 1: Win(1); break;
+        case f55 === 2 && f44 === 2 && f33 === 2 && f22 === 2: Win(2); break;
+        case f44 === 1 && f33 === 1 && f22 === 1 && f11 === 1: Win(1); break;
+        case f44 === 2 && f33 === 2 && f22 === 2 && f11 === 2: Win(2); break;
+        case f67 === 1 && f56 === 1 && f45 === 1 && f34 === 1: Win(1); break;
+        case f67 === 2 && f56 === 2 && f45 === 2 && f34 === 2: Win(2); break;
+        case f56 === 1 && f45 === 1 && f34 === 1 && f23 === 1: Win(1); break;
+        case f56 === 2 && f45 === 2 && f34 === 2 && f23 === 2: Win(2); break;
+        case f45 === 1 && f34 === 1 && f23 === 1 && f12 === 1: Win(1); break;
+        case f45 === 2 && f34 === 2 && f23 === 2 && f12 === 2: Win(2); break;
+        case f57 === 1 && f46 === 1 && f35 === 1 && f24 === 1: Win(1); break;
+        case f57 === 2 && f46 === 2 && f35 === 2 && f24 === 2: Win(2); break;
+        case f46 === 1 && f35 === 1 && f24 === 1 && f13 === 1: Win(1); break;
+        case f46 === 2 && f35 === 2 && f24 === 2 && f13 === 2: Win(2); break;
+        case f47 === 1 && f36 === 1 && f25 === 1 && f14 === 1: Win(1); break;
+        case f47 === 2 && f36 === 2 && f25 === 2 && f14 === 2: Win(2); break;
     }
 }
-function p1Win(){
+function Win(p){
     turn.css("color","green");
-    turn.text("PLAYER *1* WINS!!!");
     turn.css("font-size","10vh");
     player = 3;
-    winner = 1;
-}
-function p2Win(){
-    turn.css("color","green");
-    turn.text("PLAYER *2* WINS!!!");
-    turn.css("font-size","10vh");
-    player = 3;
-    winner = 2;
+    turn.text("PLAYER *" + p + "* WINS!!!");
+    winner = p;
+    game = 2;
 }
 //Restart
 $(".restart").click(function(){
@@ -865,6 +249,7 @@ $(".restart").click(function(){
     for(var i = 1; i < 7; i++){
         for(var j = 1; j <= 7; j++){
             backTo0("f"+i+j);
+            columns[j]=6;
         }
     }
 })
@@ -873,10 +258,8 @@ function backTo0(fxx){
 }
 //Info
 $(".info").click(function(){
-    
-    if(game === 1){
+    if(game === 1)
         alert("Game is running!!!\nIf you want to see info restart game and press Info button!");
-    }
     else if(game === 0){
         if(info === 0){
             $(".Game").css("display","none");
