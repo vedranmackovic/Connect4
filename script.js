@@ -1,8 +1,11 @@
 var turn = $("h2");
+var gameBody = $(".Game");
+var field = $(".Field");
 var game = 0;
 var player = 0;
 var winner = 0;
 var info = 0;
+var fieldColor = "black";
 var color = "";
 var columns = [, 6, 6, 6, 6, 6, 6, 6];
 var f1 = $(".f1");
@@ -31,7 +34,7 @@ for(var i = 1; i <= 7 ; i++){
     let classX = "f"+ i; 
     for(var j = 0; j < window[classX].length; j++){
         window[classX][j].onmouseover = function(){changeColor(classX, 3, "green");}
-        window[classX][j].onmouseout = function(){changeColor(classX, 2, "brown");}   
+        window[classX][j].onmouseout = function(){changeColor(classX, 2, fieldColor);}   
     }
     //Game for each row
     window[classX].click(function(){
@@ -54,7 +57,6 @@ $(".start").click(function(){
         if(game === 0){
             playerRound(2);
             game = 1;
-    
         }
         else{
             alert("Game is already running.");
@@ -68,12 +70,18 @@ $(".start").click(function(){
 function playerRound(n){
     if(n===1){
         color = "red";
+        fieldColor = "firebrick";
         turn.css("color",color);
+        gameBody.css("border", "4px double firebrick");
+        field.css("border", "2px dashed " + fieldColor);
         player = 2;
     }
     else if(n===2){
         color = "blue";
+        fieldColor = "blue";
         turn.css("color",color);
+        field.css("border", "2px dashed blue");
+        gameBody.css("border", "4px double " + fieldColor);
         player = 1;
     }
     turn.text("Player "+player+"'s turn");    
@@ -118,8 +126,10 @@ function victory(){
     }
 }
 function Win(p){
+    fieldColor = "green";
     turn.css("color","green");
-    turn.css("font-size","10vh");
+    gameBody.css("border", "4px solid green");
+    field.css("border", "3px dashed green");
     player = 3;
     turn.text("PLAYER *" + p + "* WINS!!!");
     winner = p;
@@ -136,9 +146,11 @@ $(".restart").click(function(){
     game = 0;
     player = 0;
     winner = 0;
+    fieldColor = "black";
     turn.css("color","black");
     turn.text("Press start!");
-    turn.css("font-size","5vh");
+    field.css("border", "2px dashed black");
+    gameBody.css("border", "2px solid black");
     for(var i = 1; i < 7;i++){
         for(var j = 1; j <= 7; j++){
             $(".h"+i+j).css("background","wheat");
