@@ -43,6 +43,7 @@ h2{
     padding: 0;
     font-size: 5vh;
     margin-bottom: 1vh;
+    text-align: center;
 }
 h3{
     margin: 0;
@@ -130,6 +131,48 @@ button:hover{
 }
 .description p{
     margin: 1vh;
+}
+.shakeX{
+    animation: shakedes 0.5s ease-in-out;
+    animation-iteration-count: 1;
+}
+@keyframes shakedes{
+    0% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-10px);
+    }
+    50% {
+        transform: translateX(10px);
+    }
+    75% {
+        transform: translateX(-10px);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+.shakeY{
+    animation: shakephone 0.5s ease-in-out;
+    animation-iteration-count: 1;
+}
+@keyframes shakephone{
+    0% {
+        transform: translateY(0);
+    }
+    25% {
+        transform: translateY(-10px);
+    }
+    50% {
+        transform: translateY(10px);
+    }
+    75% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0);
+    }
 }
 @media(max-width:850px){
     body{

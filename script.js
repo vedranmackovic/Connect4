@@ -4,6 +4,7 @@ var field = $(".Field");
 var game = 0;
 var player = 0;
 var winner = 0;
+var winCount = 0;
 var info = 0;
 var fieldColor = "black";
 var color = "";
@@ -91,37 +92,69 @@ function victory(){
     //vertical
     for(let c = 0; c < 7; c++){
         for(let r = 5; r >= 3; r--){
-            if(holes[r][c] === 1 && holes[r-1][c] === 1 && holes[r-2][c] === 1 && holes[r-3][c] === 1)
+            if(holes[r][c] === 1 && holes[r-1][c] === 1 && holes[r-2][c] === 1 && holes[r-3][c] === 1){
+                winCount++;
                 Win(1);
-            else if(holes[r][c] === 2 && holes[r-1][c] === 2 && holes[r-2][c] === 2 && holes[r-3][c] === 2)
+                for(let i = 0; i < 4; i++)
+                    $(".h" + (r-i+1) + (c+1)).css("border", "4px solid darkblue");
+            } 
+            else if(holes[r][c] === 2 && holes[r-1][c] === 2 && holes[r-2][c] === 2 && holes[r-3][c] === 2){
+                winCount++;
                 Win(2);
+                for(let i = 0; i < 4; i++)
+                    $(".h" + (r-i+1) + (c+1)).css("border", "4px solid darkred");
+            }
         }
     }
     //horizontal
     for(let r = 5; r >= 0; r--){
         for(let c = 0; c < 4; c++){
-            if(holes[r][c] === 1 && holes[r][c+1] === 1 && holes[r][c+2] === 1 && holes[r][c+3] === 1)
+            if(holes[r][c] === 1 && holes[r][c+1] === 1 && holes[r][c+2] === 1 && holes[r][c+3] === 1){
+                winCount++;
                 Win(1);
-            else if(holes[r][c] === 2 && holes[r][c+1] === 2 && holes[r][c+2] === 2 && holes[r][c+3] === 2)
+                for(let i = 1; i <= 4; i++)
+                    $(".h" + (r+1) + (c+i)).css("border", "4px solid darkblue");
+            } 
+            else if(holes[r][c] === 2 && holes[r][c+1] === 2 && holes[r][c+2] === 2 && holes[r][c+3] === 2){
+                winCount++;
                 Win(2);
+                for(let i = 1; i <= 4; i++)
+                    $(".h" + (r+1) + (c+i)).css("border", "4px solid darkred");
+            }
         }
     }
     // growing /
     for(let r = 5; r >= 3; r--){
         for(let c = 0; c < 4; c++){
-            if(holes[r][c] === 1 && holes[r-1][c+1] === 1 && holes[r-2][c+2] === 1 && holes[r-3][c+3] === 1)
+            if(holes[r][c] === 1 && holes[r-1][c+1] === 1 && holes[r-2][c+2] === 1 && holes[r-3][c+3] === 1){
+                winCount++;
                 Win(1);
-            else if(holes[r][c] === 2 && holes[r-1][c+1] === 2 && holes[r-2][c+2] === 2 && holes[r-3][c+3] === 2)
+                for(let i = 1; i <= 4; i++)
+                    $(".h" + (r-i+2) + (c+i)).css("border", "4px solid darkblue");
+            }  
+            else if(holes[r][c] === 2 && holes[r-1][c+1] === 2 && holes[r-2][c+2] === 2 && holes[r-3][c+3] === 2){
+                winCount++;
                 Win(2);
+                for(let i = 1; i <= 4; i++)
+                    $(".h" + (r-i+2) + (c+i)).css("border", "4px solid darkred");
+            }      
         }
     }
     // decline \
     for(let r = 5; r >= 3; r--){
         for(let c = 6; c >= 3; c--){
-            if(holes[r][c] === 1 && holes[r-1][c-1] === 1 && holes[r-2][c-2] === 1 && holes[r-3][c-3] === 1)
+            if(holes[r][c] === 1 && holes[r-1][c-1] === 1 && holes[r-2][c-2] === 1 && holes[r-3][c-3] === 1){
+                winCount++;
                 Win(1);
-            else if(holes[r][c] === 2 && holes[r-1][c-1] === 2 && holes[r-2][c-2] === 2 && holes[r-3][c-3] === 2)
+                for(let i = 0; i < 4; i++)
+                    $(".h" + (r-i+1) + (c-i+1)).css("border", "4px solid darkblue");
+            }   
+            else if(holes[r][c] === 2 && holes[r-1][c-1] === 2 && holes[r-2][c-2] === 2 && holes[r-3][c-3] === 2){
+                winCount++;
                 Win(2);
+                for(let i = 0; i < 4; i++)
+                    $(".h" + (r-i+1) + (c-i+1)).css("border", "4px solid darkred");
+            }  
         }
     }
 }
@@ -131,7 +164,36 @@ function Win(p){
     gameBody.css("border", "4px solid green");
     field.css("border", "3px dashed green");
     player = 3;
-    turn.text("PLAYER *" + p + "* WINS!!!");
+    if(isMobile()){
+        if(winCount === 1)
+            turn.html("*Player " + p + "*<br>WIN!!!");
+        else if(winCount === 2)
+            turn.html("*Player " + p + "*<br>SUPER WIN!!!");
+        else if(winCount === 3)
+            turn.html("*Player " + p + "*<br>MEGA WIN!!!");
+        else if(winCount === 4)
+            turn.html("*Player " + p + "*<br>ULTRA WIN!!!");
+        else
+            turn.html("*Player " + p + "*<br>PLUS ULTRAAA!!!");
+        gameBody.addClass("shakeY");
+    }
+    else{
+        if(winCount === 1)
+            turn.html("*Player " + p + "* WIN!!!");
+        else if(winCount === 2)
+            turn.html("*Player " + p + "* SUPER WIN!!!");
+        else if(winCount === 3)
+            turn.html("*Player " + p + "* MEGA WIN!!!");
+        else if(winCount === 4)
+            turn.html("*Player " + p + "* ULTRA WIN!!!");
+        else
+            turn.html("*Player " + p + "* PLUS ULTRAAA!!!");
+        gameBody.addClass("shakeX");
+    }
+    gameBody.on("animationend", function(){
+        gameBody.removeClass("shakeX");
+        gameBody.removeClass("shakeY");
+    })
     winner = p;
     game = 2;
 }
@@ -146,6 +208,7 @@ $(".restart").click(function(){
     game = 0;
     player = 0;
     winner = 0;
+    winCount = 0;
     fieldColor = "black";
     turn.css("color","black");
     turn.text("Press start!");
@@ -154,6 +217,7 @@ $(".restart").click(function(){
     for(var i = 1; i < 7;i++){
         for(var j = 1; j <= 7; j++){
             $(".h"+i+j).css("background","wheat");
+            $(".h"+i+j).css("border","1px solid black");
             columns[j]=6;
             holes[i-1][j-1] = 0;
         }
@@ -161,7 +225,7 @@ $(".restart").click(function(){
 })
 //Info
 $(".info").click(function(){
-    if(game === 1)
+    if(game === 1 || game === 2)
         alert("Game is running!!!\nIf you want to see info restart game and press Info button!");
     else if(game === 0){
         if(info === 0){
@@ -178,3 +242,7 @@ $(".info").click(function(){
         }
     }
 })
+//Mobile Check
+function isMobile(){
+    return window.innerWidth <= 850;
+}
