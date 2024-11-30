@@ -8,14 +8,16 @@ var winCount = 0;
 var info = 0;
 var fieldColor = "black";
 var color = "";
-var columns = [, 6, 6, 6, 6, 6, 6, 6];
-var f1 = $(".f1");
-var f2 = $(".f2");
-var f3 = $(".f3");
-var f4 = $(".f4");
-var f5 = $(".f5");
-var f6 = $(".f6");
-var f7 = $(".f7");
+var columns = [6, 6, 6, 6, 6, 6, 6];
+var f = [
+    $(".f1"),
+    $(".f2"),
+    $(".f3"),
+    $(".f4"),
+    $(".f5"),
+    $(".f6"),
+    $(".f7")
+]
 const holes = [
     [0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0],
@@ -26,27 +28,27 @@ const holes = [
 ]
 //Row changing color on hover
 function changeColor(className, size, color){
-    for(var i = 0; i < window[className].length; i++){
-        window[className][i].style.border = size + "px dashed " + color;
+    for(var i = 0; i < className.length; i++){
+        className[i].style.border = size + "px dashed " + color;
     }
 }
-for(var i = 1; i <= 7 ; i++){
+for(var i = 0; i < 7 ; i++){
     let column = i;
-    let classX = "f"+ i; 
-    for(var j = 0; j < window[classX].length; j++){
-        window[classX][j].onmouseover = function(){changeColor(classX, 3, "green");}
-        window[classX][j].onmouseout = function(){changeColor(classX, 2, fieldColor);}   
+    let classX = f[i]; 
+    for(var j = 0; j < classX.length; j++){
+        classX[j].onmouseover = function(){changeColor(classX, 3, "green");}
+        classX[j].onmouseout = function(){changeColor(classX, 2, fieldColor);}   
     }
     //Game for each row
-    window[classX].click(function(){
+    classX.click(function(){
         if(game === 1){
             var row = columns[column];
             if(columns[column]>0){
-                $(".h"+row+column).css("background", color);
-                holes[row-1][column-1] = player;
+                $(".h"+row+(column+1)).css("background", color);
+                holes[row-1][column] = player;
                 columns[column]--;
                 playerRound(player);
-            }                    
+            }
         }
         victory();
         draw();
@@ -218,7 +220,7 @@ $(".restart").click(function(){
         for(var j = 1; j <= 7; j++){
             $(".h"+i+j).css("background","wheat");
             $(".h"+i+j).css("border","1px solid black");
-            columns[j]=6;
+            columns[j-1]=6;
             holes[i-1][j-1] = 0;
         }
     }
